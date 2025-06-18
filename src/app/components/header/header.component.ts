@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   name = 'Ronaldo';
+  surname = 'Goncalves';
+  age = 27;
 }
