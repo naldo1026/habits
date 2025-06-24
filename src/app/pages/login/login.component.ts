@@ -27,12 +27,14 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
-      passowrd: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
-
   onSubmit() {
-    console.log('hello');
+    if (this.loginForm.valid) {
+      console.log(this.loginForm);
+      console.log(this.loginForm.value);
+    }
   }
 }
