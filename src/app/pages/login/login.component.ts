@@ -10,6 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+import { Store } from '@ngxs/store';
+import { SetUser } from '../../state/user.state';
+
 @Component({
   selector: 'app-login',
   imports: [
@@ -25,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -33,8 +36,16 @@ export class LoginComponent {
   }
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm);
-      console.log(this.loginForm.value);
+      const { email, password } = this.loginForm.value;
+
+      const fakeUser = {
+        userId: 'abc123',
+        email,
+      };
+
+      this.store.dispatch(new SetUser(fakeUser));
+
+      console.log('Logged in & stored in state!');
     }
   }
 }

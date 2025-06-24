@@ -1,13 +1,20 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { Store } from '@ngxs/store';
+import { UserState } from '../../state/user.state';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  name = 'Ronaldo';
-  surname = 'Goncalves';
-  age = 27;
+  userEmail$;
+
+  constructor(private store: Store) {
+    this.userEmail$ = this.store.select(UserState.getUser);
+  }
 }

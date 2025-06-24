@@ -1,1 +1,4 @@
-<h2>Hello {{ name }} {{ surname }} and my age is {{ age }}</h2>
+<header>
+  <h1>My Habits App</h1>
+  <div *ngIf="userEmail$ | async as user">👋 Hello, {{ user.email }}</div>
+</header>
